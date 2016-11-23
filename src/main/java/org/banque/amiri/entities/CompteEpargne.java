@@ -4,9 +4,11 @@ import java.util.Date;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @DiscriminatorValue("CE")
+@XmlType(name="CE")//Personaliser
 public class CompteEpargne extends Compte {
 	private double taux;
 

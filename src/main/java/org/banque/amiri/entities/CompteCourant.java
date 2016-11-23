@@ -4,9 +4,11 @@ import java.util.Date;
 
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.xml.bind.annotation.XmlType;
 
 @Entity
 @DiscriminatorValue("CC")
+@XmlType(name="CC")
 public class CompteCourant extends Compte {
 	private double decouvert;
 

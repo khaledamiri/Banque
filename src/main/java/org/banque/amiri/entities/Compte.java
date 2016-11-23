@@ -14,16 +14,15 @@ import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlTransient;
 
-
-
-
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @Entity
-// Mapping objet XML
+
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "TYPE_CPTE", discriminatorType = DiscriminatorType.STRING, length = 2)
 // Mapping objet JSON
@@ -32,6 +31,10 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 		@JsonSubTypes.Type(name = "CE", value = CompteEpargne.class)
 
 })
+//Mapping objet XML
+@XmlSeeAlso({
+
+CompteCourant.class, CompteEpargne.class })
 public abstract class Compte implements Serializable {
 	@Id
 	private String numCompte;
@@ -143,6 +146,9 @@ public abstract class Compte implements Serializable {
 		this.employe = employe;
 	}
 
+	@JsonIgnore
+	@XmlTransient
+	// meme
 	public Collection<Operation> getOperations() {
 		return operations;
 	}

@@ -9,6 +9,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.xml.bind.annotation.XmlTransient;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Client implements Serializable {
@@ -84,6 +87,8 @@ public class Client implements Serializable {
 		this.nomClient = nomClient;
 	}
 
+	@JsonIgnore
+	@XmlTransient
 	public Collection<Compte> getComptes() {
 		return comptes;
 	}

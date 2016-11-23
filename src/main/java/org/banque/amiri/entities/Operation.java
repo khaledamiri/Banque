@@ -12,10 +12,19 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.xml.bind.annotation.XmlTransient;
+
+import com.fasterxml.jackson.annotation.JsonSubTypes;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(length = 1)
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = JsonTypeInfo.As.PROPERTY, property = "type")
+@JsonSubTypes({ @JsonSubTypes.Type(name = "V", value = Versement.class),
+		@JsonSubTypes.Type(name = "R", value = Retrait.class)
+
+})
 public class Operation implements Serializable {
 
 	@Id
@@ -105,7 +114,7 @@ public class Operation implements Serializable {
 	public void setMontant(double montant) {
 		this.montant = montant;
 	}
-
+	@XmlTransient
 	public Compte getCompte() {
 		return compte;
 	}
@@ -113,7 +122,7 @@ public class Operation implements Serializable {
 	public void setCompte(Compte compte) {
 		this.compte = compte;
 	}
-
+@XmlTransient
 	public Employe getEmploye() {
 		return employe;
 	}

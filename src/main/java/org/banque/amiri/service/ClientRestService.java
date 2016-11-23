@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class ClientService {
+public class ClientRestService {
 	@Autowired
 	private ClientMetier clientMetier;
 

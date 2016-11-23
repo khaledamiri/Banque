@@ -1,5 +1,7 @@
 package org.banque.amiri.service;
 
+import java.util.Date;
+
 import org.banque.amiri.entities.Compte;
 import org.banque.amiri.metier.CompteMetier;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +22,11 @@ public class CompteRestService {
 	@RequestMapping(value = "/comptes", method = RequestMethod.POST)
 	@ResponseBody
 	public Compte saveCompte(@RequestBody Compte cpte) {
+		cpte.setDateCreation(new Date());
 		return compteMetier.saveCompte(cpte);
 	}
-	@RequestMapping(value = "/comptes/{code}", method = RequestMethod.GET)
-	public Compte getCompte(@PathVariable String codeCpte) {
-		return compteMetier.getCompte(codeCpte);
+	@RequestMapping(value = "/comptes/{numCompte}", method = RequestMethod.GET)
+	public Compte getCompte(@PathVariable String numCompte) {
+		return compteMetier.getCompte(numCompte);
 	}
 }

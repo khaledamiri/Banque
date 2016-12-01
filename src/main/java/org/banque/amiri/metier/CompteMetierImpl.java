@@ -18,7 +18,7 @@ public class CompteMetierImpl implements CompteMetier {
 
 	@Override
 	public Compte getCompte(String codeCpte) {
-		// TODO Auto-generated method stub
+		
 		return compteRepository.findOne(codeCpte);
 	}
 

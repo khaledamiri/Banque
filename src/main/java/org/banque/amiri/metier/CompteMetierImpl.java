@@ -5,7 +5,7 @@ import org.banque.amiri.entities.Compte;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-@Service
+@Service   
 public class CompteMetierImpl implements CompteMetier {
 	@Autowired
 	private CompteRepository compteRepository;

@@ -10,7 +10,7 @@
 <body ng-app="myBanqueApp" ng-controller="myBanqueController">
 	<div class="container">
 
- 
+
 
 		<div class="col-md-6 col-sm-6 col-xs-12">
 			<div class="panel panel-info spacer">
@@ -23,7 +23,7 @@
 								ng-model="numCompte">
 							<button ng-click="chargerCompte()">Charger</button>
 						</div>
-       
+
 					</form>
 				</div>
 			</div>
@@ -75,16 +75,23 @@
 									<label>Versement :</label> <input type="radio"
 										ng-model="operation.type" value="versement">
 									<!-- value="path situe au RestControlleur"  -->
-									<label>Retrai :</label> <input type="radio"
-										ng-model="operation.type" value="retrait">
+									<label>Retrait :</label> <input type="radio" ng-model="operation.type" value="retrait">
+									<label>Virement:</label> <input type="radio" ng-model="operation.type"	value="virement">
 								</div>
 
 								<div class="form-group">
-									<label>Montant :</label> <input type="text"
-										ng-model="operation.montant">
+									<span>
+									<label>Montant :</label> <input type="text" ng-model="operation.montant" size="10"/> </span> 
+									<span ng-if="operation.type=='virement'"> 
+									<label>Vers le compte:</label><input type="text" ng-model="operation.cpte2" size="10"/>
+
+									</span>
+
+
 								</div>
 								<button class="btn btn-primary" ng-click="saveOperation()">Save</button>
 							</form>
+							
 
 						</div>
 					</div>
@@ -92,36 +99,48 @@
 			</div>
 
 			<div class="col-md-6 col-sm-sm-6 col-xs-12">
-				<div class="panel panel-info spacer"></div>
-				<div class="panel-heading">Opération du compte</div>
-				<div class="panel-body">
-					<table class="table table-">
-						<thead>
-							<tr>
-								<th>Num</th>
-								<th>Date</th>
-								<th>Montant</th>
-								<th>Type</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr ng-repeat="op in pageOperations.operations">
-								<td>{{op.numOperation}}</td>
-								<td>{{op.dateOperation|date:'yyyy-MM-dd'}}</td>
-								<td>{{op.montant}}</td>
-								<td>{{op.type}}</td>
-								
-							</tr>
-						</tbody>
-						
-					</table>
+				<div class="panel panel-info spacer">
+					<div class="panel-heading">Opération du compte</div>
+					<div class="panel-body">
+						<table class="table table-">
+							<thead>
+								<tr>
+									<th>Num</th>
+									<th>Date</th>
+									<th>Montant</th>
+									<th>Type</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr ng-repeat="op in pageOperations.operations">
+									<td>{{op.numOperation}}</td>
+									<td>{{op.dateOperation|date:'yyyy-MM-dd'}}</td>
+									<td>{{op.montant}}</td>
+									<td>{{op.type}}</td>
+
+								</tr>
+							</tbody>
+
+						</table>
+					</div>
+
+					<div class="container spacer">
+						<ul class="nav nav-pills">
+							<li class="clickable" ng-class="{active:$index==pageCourante}"
+								ng-repeat="p in pages track by $index"><a
+								ng-click="goToPage($index)"> {{$index}}</a>
+							<li>
+						</ul>
+					</div>
 				</div>
 			</div>
-
 		</div>
 	</div>
-
+	<div class="col-md-12 col-sm-sm-12 col-xs-12 error" ng-if="errorMessage">
+							<label class="error">{{errorMessage}}</label>
+	</div>
 	<script type="text/javascript" src="angular/angular.min.js"></script>
 	<script type="text/javascript" src="angular/js/myApp.js"></script>
+
 </body>
 </html>

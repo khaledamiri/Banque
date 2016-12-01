@@ -62,7 +62,7 @@ public class OperationMetierImpl implements OperationMetier {
 	public boolean virement(String cpte1, String cpte2, double montant,
 			Long codeEmp) {
 		retirer(cpte1, montant, codeEmp);
-		retirer(cpte2, montant, codeEmp);
+		verser(cpte2, montant, codeEmp);
 		return false;
 	}
 

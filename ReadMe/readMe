@@ -1,0 +1,16 @@
+
+
+lorsque vous voulez le deployer en jar a POM package=jar et execute commande maven MVN package
+
+
+Si vous voulez le deployer en war en doit desactiver la dependance
+ //Serveur embeded
+<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+		
+		
+		
+		et on doit avoir le web.xml
+		donc on doit creér une class ApplicationInitializer ou tomcat sera le responsable de demarer l'application

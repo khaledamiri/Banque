@@ -18,8 +18,9 @@ public class CodeMetierImpl implements CompteMetier {
 
 	@Override
 	public Compte getCompte(String codeCpte) {
-		// TODO Auto-generated method stub
-		return compteRepository.findOne(codeCpte);
+		Compte c=compteRepository.findOne(codeCpte);
+		if (c==null) throw new RuntimeException("Compte Innexistant!");// de manniere professionnelle tu doit créer vous propre exception
+		return c;
 	}
 
 }
